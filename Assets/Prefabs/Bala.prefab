@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6932377851370157225}
   - component: {fileID: 4257771675137768904}
   - component: {fileID: 7042488957646705542}
-  - component: {fileID: 7032971399353250815}
   - component: {fileID: 6430938859450165067}
+  - component: {fileID: 3666617200723228039}
   m_Layer: 0
   m_Name: Bala
   m_TagString: Untagged
@@ -83,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7032971399353250815
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5434714156497871479}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6430938859450165067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +95,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b3e66b6796d7242b72064d3b196e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &3666617200723228039
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5434714156497871479}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

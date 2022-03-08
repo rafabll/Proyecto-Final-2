@@ -138,7 +138,7 @@ public class EnemiesLogic : MonoBehaviour
 				}
 				else
 				{
-					playerHealth.HealthPoints -= maxDamage * Time.deltaTime;
+					w
 				}
 
 				yield return null;

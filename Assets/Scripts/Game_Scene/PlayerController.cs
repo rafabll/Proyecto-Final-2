@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Vector3 InitialPos = new Vector3(-28, 0, 1);
 
-    public int PlayerHP = 100;
+    public float PlayerHP = 100f;
+    public Animator animator;
 
     public GameObject SpawnPoint;
     public LayerMask RayMask;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetBool("IsRunning", false);
         horizontalInput = Input.GetAxis("Horizontal");
         
         //Rotacion del personaje.
@@ -49,20 +52,26 @@ public class PlayerController : MonoBehaviour
         //Movimiento hacia delante.
         if (Input.GetKey(KeyCode.W))
         {
+            animator.SetBool("IsRunning", true);
+            animator.SetBool("IsSprinting", false);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
         //Movimiento hacia atras.
         if (Input.GetKey(KeyCode.S))
         {
+            animator.SetBool("IsRunning", true);
+            animator.SetBool("IsSprinting", false);
             transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
 
         //Sprint del personaje.
         if (Input.GetKey(KeyCode.LeftShift))
         {
+            animator.SetBool("IsRunning", true);
             if (Input.GetKey(KeyCode.W))
             {
+                animator.SetBool("IsSprinting", true);
                 transform.Translate(Vector3.forward * sprintSpeed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.S))
@@ -91,7 +100,16 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-
+            Attack();
         }
+        if (PlayerHP <= 0f)
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("GameOver_Menu");
+        }
+    }
+    void Attack()
+    {
+        animator.SetTrigger("Attack");
     }
 }
