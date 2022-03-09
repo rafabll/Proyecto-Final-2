@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
 
     public float PlayerHP = 100f;
     public Animator animator;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayer;
+    public float attackDmg = 40f;
+    
 
     public GameObject SpawnPoint;
     public LayerMask RayMask;
@@ -43,7 +48,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("IsRunning", false);
+        animator.SetBool("Isrunning", false);
         horizontalInput = Input.GetAxis("Horizontal");
         
         //Rotacion del personaje.
@@ -52,26 +57,26 @@ public class PlayerController : MonoBehaviour
         //Movimiento hacia delante.
         if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("IsSprinting", false);
+            animator.SetBool("Isrunning", true);
+            animator.SetBool("Issprinting", false);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
         //Movimiento hacia atras.
         if (Input.GetKey(KeyCode.S))
         {
-            animator.SetBool("IsRunning", true);
-            animator.SetBool("IsSprinting", false);
+            animator.SetBool("Isrunning", true);
+            animator.SetBool("Issprinting", false);
             transform.Translate(Vector3.back * speed * Time.deltaTime);
         }
 
         //Sprint del personaje.
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            animator.SetBool("IsRunning", true);
+            animator.SetBool("Isrunning", true);
             if (Input.GetKey(KeyCode.W))
             {
-                animator.SetBool("IsSprinting", true);
+                animator.SetBool("Issprinting", true);
                 transform.Translate(Vector3.forward * sprintSpeed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.S))
@@ -93,8 +98,6 @@ public class PlayerController : MonoBehaviour
                 var projectile = Instantiate(BalaPrefab, SpawnPoint.transform.position, BalaPrefab.transform.rotation);
                 projectile.transform.LookAt(hit.point);
                 projectile.transform.rotation *= Quaternion.Euler(-90, 0, 0);
-
-
             }
            
         }
@@ -111,5 +114,19 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         animator.SetTrigger("Attack");
+        Collider[] hitEnemy = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
+
+        foreach(Collider enemy in hitEnemy)
+        {
+            Debug.Log("We hit" + enemy.name);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDmg);
+        }
+    }    
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

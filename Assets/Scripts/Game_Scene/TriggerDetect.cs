@@ -21,8 +21,7 @@ public class TriggerDetect : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
-            followDestination.isChasing = true;
+        {            
             Debug.Log("Cuidado");
         }
     }
