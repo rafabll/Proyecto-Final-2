@@ -19,9 +19,10 @@ public class TriggerDetect : MonoBehaviour
         
     }
     void OnTriggerEnter(Collider collision)
-    {
+    {        
         if (collision.gameObject.tag == "Player")
-        {            
+        {
+            //FindObjectOfType(followdestination.zona);            
             Debug.Log("Cuidado");
         }
     }

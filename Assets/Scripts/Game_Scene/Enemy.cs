@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy died!");
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<FollowDestination>().enabled = false;
+        GetComponent<AudioSource>().enabled = false;
         this.enabled = false;
     }
 

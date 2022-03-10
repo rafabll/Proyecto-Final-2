@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 InitialPos = new Vector3(-28, 0, 1);
+    private Vector3 InitialPos = new Vector3(14, 0, -40);
 
     public float PlayerHP = 100f;
     public Animator animator;
@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Isrunning", false);
         horizontalInput = Input.GetAxis("Horizontal");
-        
+
         //Rotacion del personaje.
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
-
+        
         //Movimiento hacia delante.
         if (Input.GetKey(KeyCode.W))
         {
