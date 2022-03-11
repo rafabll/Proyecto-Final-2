@@ -15,4 +15,9 @@ public class ChangeScene : MonoBehaviour
 
         SceneManager.LoadScene("StartMenu_Scene");
     }
+
+    public void ChangeTo3()
+    {
+        SceneManager.LoadScene("Mechanics_Menu");
+    }
 }

@@ -25,7 +25,7 @@ public class FollowDestination : MonoBehaviour
 	}	
 	// Update is called once per frame
 	void Update()
-	{
+	{		
 		if (isChasing)
 		{
 			animator.SetBool("IsMoving", true);
@@ -35,6 +35,7 @@ public class FollowDestination : MonoBehaviour
             {
 				animator.SetTrigger("Attack");
 				PlayerScript.PlayerHP -= maxDamage * Time.deltaTime;
+				GetComponent<AudioSource>().enabled = true;
 			}
             else
             {

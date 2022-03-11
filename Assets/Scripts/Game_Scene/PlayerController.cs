@@ -2,13 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Vector3 InitialPos = new Vector3(14, 0, -40);
 
-    public float PlayerHP = 100f;
+    private float playerHP = 100f;
+
+    public float PlayerHP
+    {
+        set
+        {
+            playerHP = value;
+            spotLight.spotAngle = playerHP * 1.6f;
+        }
+        get
+        {
+            return playerHP;
+        }
+    }
+
     public Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
@@ -24,6 +39,9 @@ public class PlayerController : MonoBehaviour
     private float turnSpeed = 150f;
     private float sprintSpeed = 3f;       
     private Rigidbody playerRigidbody;
+
+    [Header("Luz que refleja la cantidad de vida")]
+    public Light spotLight;
     //Eje de Rotacion.
     private float horizontalInput;
     
@@ -42,7 +60,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = InitialPos;
         playerRigidbody = GetComponent<Rigidbody>();
-        //PlayerHP = GetComponent<SpotLight.spotAngle>;
     }
 
     // Update is called once per frame
@@ -50,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Isrunning", false);
         horizontalInput = Input.GetAxis("Horizontal");
+        //PlayerHP = spotLight;
 
         //Rotacion del personaje.
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);

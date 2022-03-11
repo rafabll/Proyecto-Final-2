@@ -20,13 +20,11 @@ public class BulletMovement : MonoBehaviour
     }
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        Debug.Log("TRIGGER ENTER DE LA BALA");
+        if (collision.CompareTag("Enemy"))
         {
-            BulletHit();
+            Debug.Log("HE CHOCADO");
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDmg);
         }
-    }
-    void BulletHit()
-    {
-        GetComponent<Enemy>().TakeDamage(bulletDmg);
     }
 }

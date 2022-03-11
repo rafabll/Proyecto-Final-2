@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
     public Animator enemyAnimator;
+    public ParticleSystem explosionParticleSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +21,16 @@ public class Enemy : MonoBehaviour
 
         if(currentHealth <= 0f)
         {
+            explosionParticleSystem.Play();
             Die();
         }
     }
     void Die()
-    {
+    {        
         enemyAnimator.SetBool("IsDead", true);
         Debug.Log("Enemy died!");
-        GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<FollowDestination>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = false;        
         GetComponent<AudioSource>().enabled = false;
         this.enabled = false;
     }
